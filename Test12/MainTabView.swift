@@ -8,6 +8,11 @@ struct MainTabView: View {
                     Label("Home", systemImage: "house.fill")
                 }
 
+            TodoListView()
+                .tabItem {
+                    Label("To-Do", systemImage: "checklist")
+                }
+
             ExploreView()
                 .tabItem {
                     Label("Explore", systemImage: "magnifyingglass")
@@ -16,6 +21,11 @@ struct MainTabView: View {
             ProfileView()
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
+                }
+
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape.fill")
                 }
         }
     }
