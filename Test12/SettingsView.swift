@@ -10,6 +10,15 @@ struct SettingsView: View {
 
     let appearanceOptions = ["Light", "Dark", "System"]
 
+    // Get app version from bundle
+    var appVersion: String {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+    }
+
+    var buildNumber: String {
+        Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+    }
+
     var body: some View {
         NavigationStack {
             List {
@@ -95,7 +104,14 @@ struct SettingsView: View {
                     HStack {
                         Text("Version")
                         Spacer()
-                        Text("1.0.0")
+                        Text(appVersion)
+                            .foregroundStyle(.secondary)
+                    }
+
+                    HStack {
+                        Text("Build")
+                        Spacer()
+                        Text(buildNumber)
                             .foregroundStyle(.secondary)
                     }
 
