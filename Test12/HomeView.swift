@@ -18,7 +18,7 @@ struct HomeView: View {
 
                 Text("Built with Vibuilder")
                     .font(.caption)
-                    .foregroundColor(.tertiary)
+                    .foregroundStyle(.tertiary)
             }
             .padding()
             .navigationTitle("Home")

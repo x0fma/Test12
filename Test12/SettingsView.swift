@@ -1,14 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var notificationsEnabled = true
-    @State private var soundEnabled = true
-    @State private var hapticsEnabled = true
-    @State private var autoPlayVideos = false
-    @State private var dataSync = true
-    @State private var selectedAppearance = "System"
-
-    let appearanceOptions = ["Light", "Dark", "System"]
+    @Environment(SettingsStore.self) private var settingsStore
 
     // Get app version from bundle
     var appVersion: String {
@@ -24,9 +17,9 @@ struct SettingsView: View {
             List {
                 // Appearance Section
                 Section("Appearance") {
-                    Picker("Theme", selection: $selectedAppearance) {
-                        ForEach(appearanceOptions, id: \.self) { option in
-                            Text(option).tag(option)
+                    Picker("Theme", selection: $settingsStore.selectedTheme) {
+                        ForEach(AppTheme.allCases, id: \.self) { theme in
+                            Text(theme.displayName).tag(theme)
                         }
                     }
                     .pickerStyle(.segmented)
@@ -34,16 +27,16 @@ struct SettingsView: View {
 
                 // Notifications Section
                 Section {
-                    Toggle(isOn: $notificationsEnabled) {
+                    Toggle(isOn: $settingsStore.notificationsEnabled) {
                         Label("Push Notifications", systemImage: "bell.fill")
                     }
 
-                    Toggle(isOn: $soundEnabled) {
+                    Toggle(isOn: $settingsStore.soundEnabled) {
                         Label("Sound", systemImage: "speaker.wave.2.fill")
                     }
-                    .disabled(!notificationsEnabled)
+                    .disabled(!settingsStore.notificationsEnabled)
 
-                    Toggle(isOn: $hapticsEnabled) {
+                    Toggle(isOn: $settingsStore.hapticsEnabled) {
                         Label("Haptic Feedback", systemImage: "hand.tap.fill")
                     }
                 } header: {
@@ -54,7 +47,7 @@ struct SettingsView: View {
 
                 // Media Section
                 Section("Media") {
-                    Toggle(isOn: $autoPlayVideos) {
+                    Toggle(isOn: $settingsStore.autoPlayVideos) {
                         Label("Auto-play Videos", systemImage: "play.circle.fill")
                     }
 
@@ -67,7 +60,7 @@ struct SettingsView: View {
 
                 // Data & Privacy Section
                 Section("Data & Privacy") {
-                    Toggle(isOn: $dataSync) {
+                    Toggle(isOn: $settingsStore.dataSyncEnabled) {
                         Label("Sync Data", systemImage: "arrow.triangle.2.circlepath")
                     }
 
@@ -154,4 +147,5 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView()
+        .environment(SettingsStore())
 }

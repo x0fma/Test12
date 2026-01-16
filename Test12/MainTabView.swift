@@ -13,6 +13,11 @@ struct MainTabView: View {
                     Label("To-Do", systemImage: "checklist")
                 }
 
+            DashboardView()
+                .tabItem {
+                    Label("Dashboard", systemImage: "chart.bar.fill")
+                }
+
             ExploreView()
                 .tabItem {
                     Label("Explore", systemImage: "magnifyingglass")

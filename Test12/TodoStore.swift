@@ -23,6 +23,8 @@ class TodoStore {
     func toggleCompletion(for item: TodoItem) {
         if let index = items.firstIndex(where: { $0.id == item.id }) {
             items[index].isCompleted.toggle()
+            // Track completion date
+            items[index].completedAt = items[index].isCompleted ? Date() : nil
         }
     }
 

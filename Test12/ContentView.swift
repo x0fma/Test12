@@ -17,7 +17,7 @@ struct ContentView: View {
 
             Text("Built with Vibuilder")
                 .font(.caption)
-                .foregroundColor(.tertiary)
+                .foregroundStyle(.tertiary)
         }
         .padding()
     }
